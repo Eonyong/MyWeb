@@ -1,5 +1,5 @@
+import * as React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import Navigation from "./components/Navigationbar";
 import FlipCardFront from "./components/flip-card-front";
 import { Container } from "@mui/material";

@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState, useEffect, ReactElement, useMemo } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { Swiper, SwiperSlide } from "swiper/react";
