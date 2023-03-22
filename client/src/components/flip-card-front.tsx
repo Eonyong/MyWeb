@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useState, useEffect, ReactElement, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y, Keyboard } from 'swiper';
 import { db } from '../firebase-config';
 import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y, Keyboard } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -18,7 +18,7 @@ interface QuestionData {
 const FlipCardFront = () => {
   const { subject } = useParams();
   const [questions, setQuestions] = useState<string[]>([]);
-  const [answers, setAnswers] = useState<string[][]>([]);
+  const [answers, setAnswers] = useState<string[][]>([[]]);
 
   useEffect(() => {
     async function getQuestion() {
@@ -38,27 +38,27 @@ const FlipCardFront = () => {
       keyboard: {
         enabled: true,
       },
-      onSlideChange: () => console.log('slide change'),
       sx: { textAlign: 'start' },
     }),
     [],
   );
 
-  const QuestLen = (): ReactElement[] => {
+  const QuestLen = (): JSX.Element[] => {
     return Object.values(questions).map(
       (question: string, index: number): JSX.Element => (
-        <SwiperSlide key={index}>
-          <Typography
-            variant="h6"
-            sx={{ paddingX: '4rem', marginBottom: '5em' }}
-          >
+        <SwiperSlide
+          key={index}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <Typography variant="h6" marginY={2}>
             {question}
           </Typography>
-          <div
-            style={{
-              paddingInline: '4rem',
-              alignItems: 'center',
-              height: 'max-content',
+          <Box
+            display="flex"
+            flexDirection="column"
+            sx={{
+              padding: '2em',
+              alignItems: 'start',
             }}
           >
             {answers[index]?.map(
@@ -68,22 +68,15 @@ const FlipCardFront = () => {
                 </Typography>
               ),
             )}
-          </div>
+          </Box>
         </SwiperSlide>
       ),
     );
   };
 
   return (
-    <Swiper {...swiperOptions}>
+    <Swiper {...swiperOptions} style={{ alignItems: 'center' }}>
       <Box sx={{ marginX: '5rem' }}>{QuestLen()}</Box>
-      <Typography
-        sx={{ textAlign: 'center' }}
-        paddingY={3}
-        slot="container-start"
-      >
-        {subject}
-      </Typography>
     </Swiper>
   );
 };
