@@ -1,17 +1,17 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, argv) => {
-  const isProduction = argv.mode === "production";
-  const devtool = isProduction ? "source-map" : "eval-cheap-module-source-map";
+  const isProduction = argv.mode === 'production';
+  const devtool = isProduction ? 'source-map' : 'eval-cheap-module-source-map';
 
   return {
-    mode: isProduction ? "production" : "development",
-    entry: "./src/index.tsx",
+    mode: isProduction ? 'production' : 'development',
+    entry: './src/index.tsx',
     output: {
-      filename: "[name].js",
-      path: path.resolve(__dirname, "build/"),
+      filename: '[name].js',
+      path: path.resolve(__dirname, 'build/'),
     },
     module: {
       rules: [
@@ -19,39 +19,39 @@ module.exports = (env, argv) => {
           oneOf: [
             {
               test: /\.tsx?$/,
-              loader: "ts-loader",
+              loader: 'ts-loader',
               exclude: /node_modules/,
             },
             {
               test: /\.js$/,
-              loader: "babel-loader",
+              loader: 'babel-loader',
               exclude: /node_modules/,
               options: {
-                presets: ["@babel/preset-env", "@babel/preset-react"],
+                presets: ['@babel/preset-env', '@babel/preset-react'],
               },
             },
             {
               test: /\.(scss|css)$/,
-              use: ["style-loader", "css-loader", "sass-loader"],
+              use: ['style-loader', 'css-loader', 'sass-loader'],
             },
           ],
         },
       ],
     },
     resolve: {
-      extensions: [".tsx", ".ts", ".js"],
+      extensions: ['.tsx', '.ts', '.js'],
       fallback: {
-        "process/browser": require.resolve("process/browser"),
+        'process/browser': require.resolve('process/browser'),
       },
     },
     plugins: [
       new webpack.ProvidePlugin({
-        process: "process/browser",
+        process: 'process/browser',
       }),
       new HtmlWebpackPlugin({
-        template: "./public/index.html",
-        filename: "./index.html",
-        favicon: "./public/favicon.ico",
+        template: './public/index.html',
+        filename: './index.html',
+        favicon: './public/AppIcon.ico',
       }),
     ],
     cache: true,

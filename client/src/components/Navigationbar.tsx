@@ -1,5 +1,5 @@
-import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
 import {
   Toolbar,
   Box,
@@ -9,61 +9,61 @@ import {
   Typography,
   Menu,
   MenuItem,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { SearchOutlined } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { SearchOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
 
-const options = [
-  "Accumulator",
-  "ElecGongSa",
-  "ElecMotor",
-  "ElecWire",
-  "Ground",
-  "Lights",
-  "PowerSubstation",
-  "Transformers",
-];
+const options = {
+  축전기: 'Accumulator',
+  전기공사: 'ElecGongSa',
+  전동기: 'ElecMotor',
+  전선: 'ElecWire',
+  접지: 'Ground',
+  조명: 'Lights',
+  수변전설비: 'PowerSubstation',
+  변압기: 'Transformers',
+};
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
+  '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
-    width: "auto",
+    width: 'auto',
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
+const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
+  color: 'inherit',
+  '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
       },
     },
   },
@@ -82,6 +82,7 @@ const Navigation = () => {
       usenavigate(`/ElecQuestions/${event.currentTarget.ariaLabel}`);
     }
   };
+
   return (
     <Box flexGrow={1}>
       <AppBar position="static" color="inherit">
@@ -90,8 +91,8 @@ const Navigation = () => {
           <IconButton
             aria-label="more"
             id="long-button"
-            aria-controls={open ? "long-menu" : undefined}
-            aria-expanded={open ? "true" : undefined}
+            aria-controls={open ? 'long-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
             aria-haspopup="true"
             onClick={handleClick}
           >
@@ -102,7 +103,7 @@ const Navigation = () => {
           <Menu
             id="long-menu"
             MenuListProps={{
-              "aria-labelledby": "long-button",
+              'aria-labelledby': 'long-button',
             }}
             anchorEl={anchorEl}
             open={open}
@@ -110,18 +111,18 @@ const Navigation = () => {
             PaperProps={{
               style: {
                 maxHeight: ITEM_HEIGHT * 4.5,
-                width: "20ch",
+                width: '20ch',
               },
             }}
           >
-            {options.map((option) => (
+            {Object.entries(options).map(([key, value]) => (
               <MenuItem
-                aria-label={option}
-                key={option}
-                selected={option === "Pyxis"}
+                aria-label={value}
+                key={value}
+                selected={value === 'Pyxis'}
                 onClick={handleClose}
               >
-                {option}
+                {key}
               </MenuItem>
             ))}
           </Menu>
@@ -133,7 +134,7 @@ const Navigation = () => {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "block" },
+              display: { xs: 'none', sm: 'block' },
             }}
           >
             Pacho's Blog
@@ -146,7 +147,7 @@ const Navigation = () => {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search..."
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
           {/* Search Bar End */}
