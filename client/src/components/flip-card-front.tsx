@@ -33,7 +33,7 @@ const FlipCardFront = () => {
       setAnswers(answers);
     }
     getQuestion();
-  }, [questionCollectionRef]);
+  }, [questionCollectionRef, subject]);
 
   const swiperOptions = useMemo(
     () => ({
