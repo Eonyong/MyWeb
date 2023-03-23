@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import { Box, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y, Keyboard } from 'swiper';
-import 'swiper/css';
+import { A11y, Navigation, Keyboard, EffectCreative } from 'swiper';
+import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react';
+
+import 'swiper/swiper.min.css';
+import 'swiper/css/effect-creative';
 import 'swiper/css/navigation';
 
 interface QuestionData {
@@ -15,8 +17,8 @@ interface QuestionData {
   subject: string;
 }
 
-const FlipCardFront = () => {
-  const { subject } = useParams();
+const Problems = () => {
+  const { subject } = useParams<{ subject: string }>();
   const [questions, setQuestions] = useState<string[]>([]);
   const [answers, setAnswers] = useState<string[][]>([[]]);
 
@@ -30,26 +32,32 @@ const FlipCardFront = () => {
     getQuestion();
   }, [subject]);
 
-  const swiperOptions = useMemo(
-    () => ({
-      modules: [Navigation, A11y, Keyboard],
-      navigation: true,
-      spaceBetween: 20,
-      keyboard: {
-        enabled: true,
+  const swiperOptions: SwiperProps = {
+    loop: true,
+    effect: 'creative',
+    creativeEffect: {
+      prev: {
+        shadow: true,
+        translate: ['-120%', 0, -500],
       },
-      sx: { textAlign: 'start' },
-    }),
-    [],
-  );
+      next: {
+        shadow: true,
+        translate: ['120%', 0, -500],
+      },
+    },
+    modules: [A11y, Navigation, Keyboard, EffectCreative],
+    navigation: true,
+    spaceBetween: 20,
+    keyboard: {
+      enabled: true,
+    },
+    style: { textAlign: 'start' },
+  };
 
-  const QuestLen = (): JSX.Element[] => {
+  function QuestLen() {
     return Object.values(questions).map(
       (question: string, index: number): JSX.Element => (
-        <SwiperSlide
-          key={index}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
+        <SwiperSlide key={index} style={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant="h6" marginY={2}>
             {question}
           </Typography>
@@ -66,19 +74,21 @@ const FlipCardFront = () => {
                 <Typography key={elIndex} sx={{ paddingY: 1 }}>
                   {element}
                 </Typography>
-              ),
+              )
             )}
           </Box>
         </SwiperSlide>
-      ),
+      )
     );
-  };
+  }
 
   return (
-    <Swiper {...swiperOptions} style={{ alignItems: 'center' }}>
-      <Box sx={{ marginX: '5rem' }}>{QuestLen()}</Box>
-    </Swiper>
+    <div>
+      <Swiper {...swiperOptions} style={{ alignItems: 'center' }}>
+        <Box sx={{ marginX: '5rem' }}>{QuestLen()}</Box>
+      </Swiper>
+    </div>
   );
 };
 
-export default FlipCardFront;
+export default Problems;
