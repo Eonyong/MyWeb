@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -51,20 +50,9 @@ export default function Nav(props: Props) {
     >
       <img src="/images/AppIcon.png" style={{ width: '100%' }} />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Accumulator', 'ElecGongSa', 'ElecMotor', 'ElecWire'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton onClick={() => navigate('/problems')}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate(`problems/${text}`)}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -76,7 +64,7 @@ export default function Nav(props: Props) {
 
   return (
     <div>
-      {(['left'] as const).map((anchor) => (
+      {(['left'] as const).map((anchor: 'left') => (
         <React.Fragment key={anchor}>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
