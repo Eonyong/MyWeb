@@ -1,60 +1,45 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = (env, argv) => {
-  const isProduction = argv.mode === 'production';
-  const devtool = isProduction ? 'source-map' : 'eval-cheap-module-source-map';
-
-  return {
-    mode: isProduction ? 'production' : 'development',
-    entry: './src/index.tsx',
-    output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, 'build/'),
-    },
-    module: {
-      rules: [
-        {
-          oneOf: [
-            {
-              test: /\.tsx?$/,
-              loader: 'ts-loader',
-              exclude: /node_modules/,
-            },
-            {
-              test: /\.js$/,
-              loader: 'babel-loader',
-              exclude: /node_modules/,
-              options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-              },
-            },
-            {
-              test: /\.(scss|css)$/,
-              use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-          ],
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
-      fallback: {
-        'process/browser': require.resolve('process/browser'),
+module.exports = {
+  entry: './src/index.tsx',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
-    },
-    plugins: [
-      new webpack.ProvidePlugin({
-        process: 'process/browser',
-      }),
-      new HtmlWebpackPlugin({
-        template: './public/index.html',
-        filename: './index.html',
-        favicon: './public/AppIcon.ico',
-      }),
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
+      },
     ],
-    cache: true,
-    devtool,
-  };
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
+  devServer: {
+    port: 3000,
+    open: true,
+    historyApiFallback: true,
+  },
 };
