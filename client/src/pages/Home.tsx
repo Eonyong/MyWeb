@@ -6,7 +6,7 @@ import { Stack } from '@mui/material';
 
 const Home = () => {
   return (
-    <Stack spacing={3}>
+    <Stack spacing={3} height={window.innerHeight}>
       <Header />
       <Outlet />
     </Stack>
