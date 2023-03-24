@@ -24,10 +24,12 @@ const Problems = () => {
 
   useEffect(() => {
     async function getQuestion() {
-      const snapshot = await getDoc(doc(db, 'ElecQuestions', `${subject}`));
-      const { questions, answers } = snapshot.data() as QuestionData;
-      setQuestions(questions);
-      setAnswers(answers);
+      if (subject) {
+        const snapshot = await getDoc(doc(db, 'ElecQuestions', `${subject}`));
+        const { questions, answers } = snapshot.data() as QuestionData;
+        setQuestions(questions);
+        setAnswers(answers);
+      }
     }
     getQuestion();
   }, [subject]);
