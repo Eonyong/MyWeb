@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { AppBar, Box, IconButton, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/icons-material';
 import Nav from '../nav';
 
 export default function Header() {
-  const [value, setValue] = React.useState(false);
+  const [value, setValue] = useState(false);
 
   const handleClick = () => {
     setValue(!value);
@@ -13,6 +14,7 @@ export default function Header() {
 
   return (
     <Box sx={{ display: 'flex' }}>
+      <Nav value={window.innerWidth > 900 ? true : value} />
       <AppBar
         position="fixed"
         sx={{
@@ -25,6 +27,7 @@ export default function Header() {
           sx={{
             mr: 1,
             color: 'text.primary',
+            md: 'none',
           }}
           onClick={() => handleClick()}
         >
@@ -57,7 +60,6 @@ export default function Header() {
           <Person3Outlined />
         </Stack>
       </AppBar>
-      <Nav value={value} />
     </Box>
   );
 }

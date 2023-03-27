@@ -40,8 +40,8 @@ export default function Nav(props: Props) {
 
   const list = (anchor: Anchor) => (
     <Box
+      component="div"
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
@@ -62,7 +62,17 @@ export default function Nav(props: Props) {
     <div>
       {(['left'] as const).map((anchor: 'left') => (
         <React.Fragment key={anchor}>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+          <Drawer
+            anchor={anchor}
+            variant={window.innerWidth > 900 ? 'permanent' : 'persistent'}
+            open={state[anchor]}
+            onClose={() => {
+              if (window.innerWidth >= 900) {
+                toggleDrawer(anchor, false);
+              }
+            }}
+            sx={{ flexShrink: 0 }}
+          >
             {list(anchor)}
           </Drawer>
         </React.Fragment>
