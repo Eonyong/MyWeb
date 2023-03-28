@@ -5,12 +5,12 @@ import Drawer from '@mui/material/Drawer';
 // import ListItem from '@mui/material/ListItem';
 // import ListItemText from '@mui/material/ListItemText';
 // import { useNavigate } from 'react-router-dom';
-import ListItemButton from '@mui/material/ListItemButton';
 import appRoutes from '../../routes/appRoutes';
-import { Avatar, List, ListItemIcon, Stack, Toolbar } from '@mui/material';
+import { Avatar, List, Stack, Toolbar } from '@mui/material';
 import { RouteType } from '../../routes/config';
 import sizeConfig from '../../configs/sizeConfig';
 import colorConfig from '../../configs/colorConfig';
+import SidebarItem from './SidebarItem';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -91,12 +91,7 @@ const Nav = (props: Props) => {
               </Stack>
             </Toolbar>
             {appRoutes.map((route: RouteType, index: number) =>
-              route.sidebarProps ? (
-                <ListItemButton key={index}>
-                  <ListItemIcon>{route.sidebarProps.icon && route.sidebarProps.icon}</ListItemIcon>
-                  {route.sidebarProps.displayText}
-                </ListItemButton>
-              ) : null
+              route.sidebarProps ? <SidebarItem item={route} key={index} /> : null
             )}
           </List>
         </Drawer>
