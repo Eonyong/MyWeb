@@ -15,33 +15,13 @@ const generateRoutes = (routes: RouteType[]): ReactNode => {
     ) : (
       <Route
         path={route.path}
-        element={
-          <PageWrapper state={route.state ?? undefined} key={index}>
-            {route.child && generateRoutes(route.child)}
-          </PageWrapper>
-        }
-      ></Route>
+        element={<PageWrapper state={route.state ?? undefined}>{route.element}</PageWrapper>}
+        key={index}
+      >
+        {route.child && generateRoutes(route.child)}
+      </Route>
     );
   });
 };
 
 export const routes: ReactNode = generateRoutes(appRoutes);
-
-// export default function Router() {
-//   const routes = useRoutes([
-//     {
-//       path: '/',
-//       element: <MainLayout />,
-//       children: [
-//         { index: true, element: <HomePage /> },
-//         // { path: 'problems', element: <SubjectLayout /> },
-//         // { path: 'problems/:subject', element: <Problems /> },
-//       ],
-//     },
-//     {
-//       path: '*',
-//       element: <h1>404</h1>,
-//     },
-//   ]);
-//   return routes;
-// }

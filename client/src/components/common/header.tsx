@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { AppBar, Box, IconButton, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/icons-material';
-import Nav from './Navbar';
 import sizeConfig from '../../configs/sizeConfig';
 import colorConfig from '../../configs/colorConfig';
 
@@ -16,7 +15,6 @@ export default function Header() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Nav value={window.innerWidth > 900 ? true : value} />
       <AppBar
         position="fixed"
         sx={{
