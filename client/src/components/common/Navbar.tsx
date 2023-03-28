@@ -13,7 +13,7 @@ interface Props {
   value: boolean;
 }
 
-export default function Nav(props: Props) {
+const Nav = (props: Props) => {
   const navigate = useNavigate();
   const { value } = props;
 
@@ -79,4 +79,6 @@ export default function Nav(props: Props) {
       ))}
     </div>
   );
-}
+};
+
+export default Nav;

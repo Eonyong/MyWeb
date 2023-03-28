@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase-config';
+import { db } from '../configs/firebase-config';
 import { Box, Typography } from '@mui/material';
 import { A11y, Navigation, Keyboard, EffectCreative } from 'swiper';
 import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react';

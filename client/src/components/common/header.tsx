@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { AppBar, Box, IconButton, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/icons-material';
-import Nav from '../nav';
+import Nav from './Navbar';
+import sizeConfig from '../../configs/sizeConfig';
+import colorConfig from '../../configs/colorConfig';
 
 export default function Header() {
   const [value, setValue] = useState(false);
@@ -18,10 +20,13 @@ export default function Header() {
       <AppBar
         position="fixed"
         sx={{
-          display: 'flex',
+          width: `calc(100% - ${sizeConfig.sidebar.width})`,
+          ml: sizeConfig.sidebar.width,
+          boxShadow: 'unset',
+          backgroundColor: colorConfig.header.bg,
+          color: colorConfig.header.color,
           flexDirection: 'row',
         }}
-        color="inherit"
       >
         <IconButton
           sx={{

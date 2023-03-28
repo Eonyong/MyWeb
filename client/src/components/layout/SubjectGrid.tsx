@@ -5,6 +5,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+type Props = {};
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -24,7 +26,7 @@ const Subjects: string[] = [
   'Transformers',
 ];
 
-const SubjectLayout = () => {
+const SubjectLayout = (props: Props) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
