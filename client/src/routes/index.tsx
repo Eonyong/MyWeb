@@ -1,17 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
-// import HomePage from '../pages/dashboard/home/HomePage';
-// import Problems from '../pages/Problems';
-// import SubjectLayout from '../components/layout/SubjectGrid';
-// import MainLayout from '../components/layout/MainLayout';
 import { RouteType } from './config';
 import PageWrapper from '../components/layout/PageWrapper';
 import appRoutes from './appRoutes';
 
-const generateRoutes = (routes: RouteType[]): ReactNode => {
-  return routes.map((route: RouteType, index: number) => {
+const generateRoutes = (routes: RouteType[]) => {
+  return routes.map((route: RouteType, index) => {
     return route.index ? (
-      <Route index path={route.path} element={<PageWrapper state={route.state}>{route.element}</PageWrapper>}></Route>
+      <Route index path={route.path} element={<PageWrapper state={route.state}>{route.element}</PageWrapper>} />
     ) : (
       <Route
         path={route.path}
@@ -24,4 +20,4 @@ const generateRoutes = (routes: RouteType[]): ReactNode => {
   });
 };
 
-export const routes: ReactNode = generateRoutes(appRoutes);
+export const routes = generateRoutes(appRoutes);

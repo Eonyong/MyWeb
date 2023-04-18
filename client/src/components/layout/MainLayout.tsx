@@ -1,24 +1,21 @@
 import { Box, Toolbar } from '@mui/material';
 import * as React from 'react';
 import Nav from '../common/Sidebar';
-import sizeConfig from '../../configs/sizeConfig';
 import Header from '../common/header';
 import { Outlet } from 'react-router-dom';
 import colorConfig from '../../configs/colorConfig';
+import sizeConfig from '../../configs/sizeConfig';
 
 const MainLayout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Header />
-      <Box component="nav" sx={{ width: sizeConfig.sidebar.width, flexShrink: 0 }}>
-        <Nav value={true} />
-      </Box>
+      <Nav value={true} />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          width: `calc(100% - ${sizeConfig.sidebar.width})`,
+          width: { xs: `calc(${window.innerWidth} - 60)px`, sm: `calc(100% - ${sizeConfig.sidebar.width})px` },
           minHeight: '100vh',
           backgroundColor: colorConfig.header.bg,
         }}

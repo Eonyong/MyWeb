@@ -1,10 +1,5 @@
 import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
-// import Box from '@mui/material/Box';
-// import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemText from '@mui/material/ListItemText';
-// import { useNavigate } from 'react-router-dom';
 import appRoutes from '../../routes/appRoutes';
 import { Avatar, List, Stack, Toolbar } from '@mui/material';
 import { RouteType } from '../../routes/config';
@@ -43,35 +38,15 @@ const Nav = (props: Props) => {
     setState({ ...state, [anchor]: open });
   };
 
-  // const list = (anchor: Anchor) => (
-  //   <Box
-  //     component="div"
-  //     sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : sizeConfig.sidebar.width, flexShrink: 0 }}
-  //     onClick={toggleDrawer(anchor, false)}
-  //     onKeyDown={toggleDrawer(anchor, false)}
-  //   >
-  //     <img src="/images/AppIcon.png" style={{ width: '100%' }} />
-  //     <List disablePadding>
-  //       {['problems'].map((text, index) => (
-  //         <ListItem key={index} disablePadding>
-  //           <ListItemButton onClick={() => navigate(`${text}`)}>
-  //             <ListItemText primary={text} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // );
-
   return (
     <>
       {(['left'] as const).map((anchor: 'left') => (
         <Drawer
           key={anchor}
           sx={{
-            width: sizeConfig.sidebar.width,
+            width: { xs: `60px`, sm: `${sizeConfig.sidebar.width}px` },
             '& .MuiDrawer-paper': {
-              width: sizeConfig.sidebar.width,
+              width: { xs: `60px`, sm: `${sizeConfig.sidebar.width}px` },
               boxSizing: 'border-box',
               borderRight: '0px',
               backgroundColor: colorConfig.sidebar.hoverBg,
@@ -86,9 +61,11 @@ const Nav = (props: Props) => {
         >
           <List disablePadding>
             <Toolbar>
-              <Stack sx={{ width: '100%' }} direction="row" alignItems="center" justifyContent="center">
-                <Avatar src="src/assets/images/AppIcon.png" />
-              </Stack>
+              {window.innerWidth > 600 ? (
+                <Stack sx={{ width: '100%' }} direction="row" alignItems="center" justifyContent="center">
+                  <Avatar src="src/assets/images/AppIcon.png" />
+                </Stack>
+              ) : null}
             </Toolbar>
             {appRoutes.map((route: RouteType, index: number) =>
               route.sidebarProps ? <SidebarItem item={route} key={index} /> : null

@@ -11,7 +11,7 @@ const SidebarItem = ({ item }: Props) => {
   return item.sidebarProps && item.path ? (
     <ListItemButton onClick={() => navigation(`${item.path}`)}>
       <ListItemIcon>{item.sidebarProps.icon && item.sidebarProps.icon}</ListItemIcon>
-      {item.sidebarProps.displayText}
+      {window.innerWidth > 600 ? `${item.sidebarProps.displayText}` : null}
     </ListItemButton>
   ) : null;
 };
