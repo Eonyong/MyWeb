@@ -24,7 +24,7 @@ const Subjects: string[] = [
   'Transformers',
 ];
 
-const SubjectLayout = () => {
+const SubjectIndex = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -41,4 +41,4 @@ const SubjectLayout = () => {
   );
 };
 
-export default SubjectLayout;
+export default SubjectIndex;
