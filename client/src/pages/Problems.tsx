@@ -83,7 +83,7 @@ const Problems = () => {
       )
     );
   }
-
+  console.log(subject);
   return (
     <div>
       <Swiper {...swiperOptions} style={{ alignItems: 'center' }}>

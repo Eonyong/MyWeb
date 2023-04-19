@@ -1,15 +1,20 @@
-import React from 'react';
-import HomePage from '../pages/dashboard/home/HomePage';
+import React, { lazy, Suspense } from 'react';
 import { RouteType } from './config';
-import Problems from '../pages/Problems';
-import SubjectIndex from '../pages/dashboard/SubjectIndex';
 import HomeIcon from '@mui/icons-material/Home';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+
+const HomePage = lazy(() => import('../pages/dashboard/home/HomePage'));
+const Problems = lazy(() => import('../pages/Problems'));
+const SubjectIndex = lazy(() => import('../pages/dashboard/SubjectIndex'));
 
 const appRoutes: RouteType[] = [
   {
     index: true,
-    element: <HomePage />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <HomePage />
+      </Suspense>
+    ),
     state: 'home',
     sidebarProps: {
       displayText: 'Home',
@@ -17,26 +22,30 @@ const appRoutes: RouteType[] = [
     },
   },
   {
-    // 위 /problems 링크의 화면
     index: true,
     path: '/problems',
-    element: <SubjectIndex />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <SubjectIndex />
+      </Suspense>
+    ),
     state: 'problems',
     sidebarProps: {
       displayText: 'problems',
       icon: <LibraryBooksIcon />,
     },
-    child: [
-      // /problems/과목 링크의 화면
-      {
-        path: '/problems/:subject',
-        element: <Problems />,
-        state: 'problems.subject',
-        sidebarProps: {
-          displayText: 'Subject',
-        },
-      },
-    ],
+  },
+  {
+    path: '/problems/:subject',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Problems />
+      </Suspense>
+    ),
+    state: 'problems.subject',
+    sidebarProps: {
+      displayText: 'Subject',
+    },
   },
 ];
 
