@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { RouteType } from './config';
 import HomeIcon from '@mui/icons-material/Home';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import { Popover, Skeleton } from '@mui/material';
 
 const HomePage = lazy(() => import('../pages/dashboard/home/HomePage'));
 const Problems = lazy(() => import('../pages/Problems'));
@@ -11,7 +12,7 @@ const appRoutes: RouteType[] = [
   {
     index: true,
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Popover open={false}>Loading...</Popover>}>
         <HomePage />
       </Suspense>
     ),
@@ -22,10 +23,9 @@ const appRoutes: RouteType[] = [
     },
   },
   {
-    index: true,
     path: '/problems',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Skeleton animation="pulse" variant="rounded" />}>
         <SubjectIndex />
       </Suspense>
     ),
@@ -38,7 +38,7 @@ const appRoutes: RouteType[] = [
   {
     path: '/problems/:subject',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Skeleton animation="wave" variant="rectangular" sx={{ height: 190 }} />}>
         <Problems />
       </Suspense>
     ),
