@@ -23,6 +23,7 @@ const appRoutes: RouteType[] = [
     },
   },
   {
+    index: true,
     path: '/problems',
     element: (
       <Suspense fallback={<Skeleton animation="pulse" variant="rounded" />}>
@@ -43,9 +44,6 @@ const appRoutes: RouteType[] = [
       </Suspense>
     ),
     state: 'problems.subject',
-    sidebarProps: {
-      displayText: 'Subject',
-    },
   },
 ];
 
