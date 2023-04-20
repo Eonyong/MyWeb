@@ -15,7 +15,10 @@ const MainLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          width: { xs: `calc(${window.innerWidth} - 60)px`, sm: `calc(100% - ${sizeConfig.sidebar.width})px` },
+          width: {
+            xs: `calc(${window.innerWidth} - 60)px`,
+            sm: `calc(${window.innerWidth} - ${sizeConfig.sidebar.width})px`,
+          },
           minHeight: '100vh',
           backgroundColor: colorConfig.header.bg,
         }}

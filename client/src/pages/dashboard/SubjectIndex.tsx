@@ -33,7 +33,9 @@ const SubjectIndex = () => {
       <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Subjects.map((subject: string, index) => (
           <Grid xs={2} sm={4} md={3} key={index}>
-            <Item onClick={() => navigate(`${pathname}/${subject}`)}>{subject}</Item>
+            <Item onClick={() => navigate(`${pathname}/${subject}`)} elevation={8}>
+              {subject}
+            </Item>
           </Grid>
         ))}
       </Grid>

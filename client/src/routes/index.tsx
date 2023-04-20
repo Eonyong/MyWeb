@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Route } from 'react-router-dom';
 import { RouteType } from './config';
 import PageWrapper from '../components/layout/PageWrapper';
@@ -14,7 +14,7 @@ const generateRoutes = (routes: RouteType[]) => {
         element={<PageWrapper state={route.state ?? undefined}>{route.element}</PageWrapper>}
         key={index}
       >
-        {route.child && generateRoutes(route.child)}
+        {route.children && generateRoutes(route.children)}
       </Route>
     );
   });

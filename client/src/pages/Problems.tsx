@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../configs/firebase-config';
-import { Box, Typography } from '@mui/material';
-import { A11y, Navigation, Keyboard, EffectCreative } from 'swiper';
-import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react';
+import { Divider, Typography } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
 
+import 'swiper/css';
 import 'swiper/swiper.min.css';
-import 'swiper/css/effect-creative';
 import 'swiper/css/navigation';
 
 interface QuestionData {
@@ -21,6 +21,7 @@ const Problems = () => {
   const { subject } = useParams<{ subject: string }>();
   const [questions, setQuestions] = useState<string[]>([]);
   const [answers, setAnswers] = useState<string[][]>([[]]);
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
     async function getQuestion() {
@@ -29,67 +30,47 @@ const Problems = () => {
         const { questions, answers } = snapshot.data() as QuestionData;
         setQuestions(questions);
         setAnswers(answers);
+        setWindowWidth(window.innerWidth);
       }
     }
     getQuestion();
   }, [subject]);
 
-  const swiperOptions: SwiperProps = {
-    loop: true,
-    effect: 'creative',
-    creativeEffect: {
-      prev: {
-        shadow: true,
-        translate: ['-120%', 0, -500],
-      },
-      next: {
-        shadow: true,
-        translate: ['120%', 0, -500],
-      },
-    },
-    modules: [A11y, Navigation, Keyboard, EffectCreative],
-    navigation: true,
-    spaceBetween: 20,
-    keyboard: {
-      enabled: true,
-    },
-    style: { textAlign: 'start' },
-  };
-
-  function QuestLen() {
-    return Object.values(questions).map(
-      (question: string, index: number): JSX.Element => (
-        <SwiperSlide key={index} style={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography variant="h6" marginY={2}>
-            {question}
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            sx={{
-              padding: '2em',
-              alignItems: 'start',
-            }}
-          >
-            {answers[index]?.map(
-              (element: string, elIndex: number): JSX.Element => (
-                <Typography key={elIndex} sx={{ paddingY: 1 }}>
-                  {element}
-                </Typography>
-              )
-            )}
-          </Box>
-        </SwiperSlide>
-      )
-    );
-  }
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div>
-      <Swiper {...swiperOptions} style={{ alignItems: 'center' }}>
-        <Box sx={{ marginX: '5rem' }}>{QuestLen()}</Box>
+    <>
+      <Swiper
+        navigation
+        loop
+        modules={[Navigation]}
+        style={{ width: windowWidth < 600 ? windowWidth - 60 : windowWidth - 300 }}
+      >
+        {questions
+          ? Object.values(questions).map((value, index) => {
+              return (
+                <SwiperSlide key={index}>
+                  <Typography paragraph>{value}</Typography>
+                  <Divider />
+                  {answers[index].map((ans, ind) => (
+                    <Typography component="h6" key={ind} sx={{ paddingY: '1rem' }}>
+                      {ans}
+                    </Typography>
+                  ))}
+                </SwiperSlide>
+              );
+            })
+          : null}
       </Swiper>
-    </div>
+    </>
   );
 };
 

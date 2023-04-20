@@ -61,7 +61,7 @@ const Nav = (props: Props) => {
         >
           <List disablePadding>
             <Toolbar>
-              {window.innerWidth > 600 ? (
+              {window.innerWidth > 300 ? (
                 <Stack sx={{ width: '100%' }} direction="row" alignItems="center" justifyContent="center">
                   <Avatar src="src/assets/images/AppIcon.png" />
                 </Stack>
