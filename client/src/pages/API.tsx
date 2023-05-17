@@ -5,7 +5,7 @@ const APIs = (): any => {
     url: `https://finlife.fss.or.kr/finlifeapi/companySearch.json`,
     method: 'GET',
     data: {
-      auth: process.env.REACT_APP_API_ID,
+      auth: process.env.REACT_APP_OPEN_API_ID,
       topFinGrpNo: '020000',
       pageNo: '1',
     },
