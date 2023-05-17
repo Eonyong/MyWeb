@@ -14,7 +14,7 @@ const APIs = (): void => {
   };
   axios(Option)
     .then((res: AxiosResponse) => console.log(res))
-    .catch((err: AxiosError) => console.error("This Fn is Error"));
+    .catch(() => console.error('This Fn is Error'));
 };
 
 export default APIs;
