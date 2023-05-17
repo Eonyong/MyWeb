@@ -1,7 +1,9 @@
 import * as React from 'react';
+import APIs from '../../API';
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  APIs()
+  return <div>apis</div>;
 };
 
 export default HomePage;

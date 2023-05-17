@@ -14,7 +14,6 @@ interface Props {
 }
 
 const Nav = (props: Props) => {
-  // const navigate = useNavigate();
   const { value } = props;
 
   const [state, setState] = React.useState({
