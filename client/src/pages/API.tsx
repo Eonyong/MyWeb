@@ -10,6 +10,7 @@ const APIs = (): void => {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${auth}`,
+      'Access-Control-Allow-Origin': '*',
     },
   };
   axios(Option)
