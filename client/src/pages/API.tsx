@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 
-const APIs = (): any => {
+const APIs = (): void => {
   const pageNo = 1;
   const topFinGrpNo = '020000';
   const auth = process.env.REACT_APP_OPEN_API_ID;
@@ -10,12 +10,11 @@ const APIs = (): any => {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${auth}`,
-      
     },
   };
   axios(Option)
-    .then((res: any) => console.log(res))
-    .catch((err) => console.log(err));
+    .then((res: AxiosResponse) => console.log(res))
+    .catch((err: AxiosError) => console.log(err));
 };
 
 export default APIs;
