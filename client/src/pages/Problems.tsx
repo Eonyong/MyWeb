@@ -60,11 +60,13 @@ const Problems = () => {
                 <SwiperSlide key={index}>
                   <Typography paragraph>{value}</Typography>
                   <Divider />
-                  {answers[index].map((ans, ind) => (
-                    <Typography component="h6" key={ind} sx={{ paddingY: '1rem' }}>
-                      {ans}
-                    </Typography>
-                  ))}
+                  {answers[index]
+                    ? answers[index].map((ans, ind) => (
+                        <Typography component="h6" key={ind} sx={{ paddingY: '1rem' }}>
+                          {ans}
+                        </Typography>
+                      ))
+                    : null}
                 </SwiperSlide>
               );
             })

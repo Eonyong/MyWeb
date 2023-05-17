@@ -5,7 +5,7 @@ const colorConfig = {
     bg: "#233044",
     color: "#eeeeee",
     hoverBg: "#aafaff",
-    actievBg: "#1e253a"
+    activeBg: "#1e253a"
   },
   header: {
     bg: "#fff",
