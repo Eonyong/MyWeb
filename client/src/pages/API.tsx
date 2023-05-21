@@ -5,12 +5,18 @@ const APIs = (): void => {
   const topFinGrpNo = '020000';
   const auth = process.env.REACT_APP_OPEN_API_ID;
   const Option = {
-    url: `https://finlife.fss.or.kr/finlifeapi/companySearch.json?auth=${auth}&topFinGrpNo=${topFinGrpNo}&pageNo=${pageNo}`,
+    url: `http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json`,
     method: 'GET',
+    params: {
+      auth: auth,
+      topFinGrpNo: topFinGrpNo,
+      pageNo: pageNo,
+    },
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${auth}`,
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTION',
     },
   };
   axios(Option)
