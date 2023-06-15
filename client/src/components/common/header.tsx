@@ -5,11 +5,9 @@ import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/ico
 import { GoogleLogin, GithubLogin } from './FirebaseLogin';
 import colorConfig from '../../configs/colorConfig';
 
-
-const Header = () => {
+const HeaderLayout = () => {
   // const [userData, setUserData] = useState<null | UserCredential>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -43,7 +41,7 @@ const Header = () => {
             <NotificationsOutlined />
           </IconButton>
           <>
-            <IconButton aria-controls="menu-app-bar" aria-aria-haspopup="true" onClick={handleMenu}>
+            <IconButton aria-controls="menu-app-bar" aria-haspopup="true" onClick={handleMenu}>
               <Person3Outlined />
             </IconButton>
             <Menu
@@ -70,4 +68,4 @@ const Header = () => {
     </Box>
   );
 };
-export default Header;
+export default HeaderLayout;
