@@ -1,7 +1,7 @@
 import { Box, Toolbar } from '@mui/material';
 import * as React from 'react';
 import Nav from '../common/Sidebar';
-import Header from '../common/header';
+import HeaderLayout from '../common/HeaderLayout';
 import { Outlet } from 'react-router-dom';
 import colorConfig from '../../configs/colorConfig';
 import sizeConfig from '../../configs/sizeConfig';
@@ -9,7 +9,7 @@ import sizeConfig from '../../configs/sizeConfig';
 const MainLayout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header />
+      <HeaderLayout />
       <Nav value={true} />
       <Box
         component="main"
