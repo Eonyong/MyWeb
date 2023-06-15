@@ -62,7 +62,7 @@ const Problems = () => {
                   <Divider />
                   {answers[index]
                     ? answers[index].map((ans, ind) => (
-                        <Typography component="h6" key={ind} sx={{ paddingY: '1rem' }}>
+                        <Typography key={ind} sx={{ paddingY: '1rem', fontSize: "2rem" }}>
                           {ans}
                         </Typography>
                       ))
