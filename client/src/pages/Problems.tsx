@@ -58,11 +58,11 @@ const Problems = () => {
           ? Object.values(questions).map((value, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <Typography paragraph sx={{fontSize: "1.3rem"}}>{value}</Typography>
+                  <Typography paragraph sx={{fontSize: "1.3rem", margin: "1rem", marginTop: "0rem"}}>{value}</Typography>
                   <Divider />
                   {answers[index]
                     ? answers[index].map((ans, ind) => (
-                        <Typography key={ind} sx={{ paddingY: '1rem', fontSize: "1rem" }}>
+                        <Typography key={ind} sx={{ margin: "1rem", marginBottom: "0rem", fontSize: "1rem" }}>
                           {ans}
                         </Typography>
                       ))
