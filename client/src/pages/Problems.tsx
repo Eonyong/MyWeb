@@ -24,7 +24,7 @@ const Problems = () => {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
-    async function getQuestion() {
+    const getQuestion = async () => {
       if (subject) {
         const snapshot = await getDoc(doc(db, 'ElecQuestions', `${subject}`));
         const { questions, answers } = snapshot.data() as QuestionData;
@@ -32,11 +32,9 @@ const Problems = () => {
         setAnswers(answers);
         setWindowWidth(window.innerWidth);
       }
-    }
+    };
     getQuestion();
-  }, [subject]);
-
-  useEffect(() => {
+    
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -44,7 +42,9 @@ const Problems = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+
+    
+  }, [subject]);
 
   return (
     <>
@@ -58,11 +58,13 @@ const Problems = () => {
           ? Object.values(questions).map((value, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <Typography paragraph sx={{fontSize: "1.3rem", margin: "1rem", marginTop: "0rem"}}>{value}</Typography>
+                  <Typography paragraph sx={{ fontSize: '1.3rem', margin: '1rem', marginTop: '0rem' }}>
+                    {value}
+                  </Typography>
                   <Divider />
                   {answers[index]
                     ? answers[index].map((ans, ind) => (
-                        <Typography key={ind} sx={{ margin: "1rem", marginBottom: "0rem", fontSize: "1rem" }}>
+                        <Typography key={ind} sx={{ margin: '1rem', marginBottom: '0rem', fontSize: '1rem' }}>
                           {ans}
                         </Typography>
                       ))

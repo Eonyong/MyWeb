@@ -4,7 +4,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import MainLayout from './components/layout/MainLayout';
 import { routes } from './routes';
 
+
 const App = () => {
+
   return (
     <HelmetProvider>
       <BrowserRouter>

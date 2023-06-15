@@ -1,9 +1,23 @@
 import * as React from 'react';
-import { AppBar, Box, IconButton, Stack } from '@mui/material';
+import { useState } from 'react';
+import { AppBar, Box, IconButton, Menu, MenuItem, Stack } from '@mui/material';
 import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/icons-material';
+import { GoogleLogin, GithubLogin } from './FirebaseLogin';
 import colorConfig from '../../configs/colorConfig';
 
-export default function Header() {
+
+const Header = () => {
+  // const [userData, setUserData] = useState<null | UserCredential>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar
@@ -28,11 +42,32 @@ export default function Header() {
           <IconButton>
             <NotificationsOutlined />
           </IconButton>
-          <IconButton>
-            <Person3Outlined />
-          </IconButton>
+          <>
+            <IconButton aria-controls="menu-app-bar" aria-aria-haspopup="true" onClick={handleMenu}>
+              <Person3Outlined />
+            </IconButton>
+            <Menu
+              id="menu-app-bar"
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={GoogleLogin}>GoogleLogin</MenuItem>
+              <MenuItem onClick={GithubLogin}>GithubLogin</MenuItem>
+            </Menu>
+          </>
         </Stack>
       </AppBar>
     </Box>
   );
-}
+};
+export default Header;
