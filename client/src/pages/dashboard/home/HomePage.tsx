@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { auth } from '../../../configs/firebase-config';
 
 const HomePage = () => {
-  return <div>MainPage</div>;
+  const User = auth.currentUser;
+  return <div>{User?.displayName}</div>;
 };
 
 export default HomePage;

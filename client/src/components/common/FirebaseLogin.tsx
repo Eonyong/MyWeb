@@ -1,8 +1,10 @@
-import { GithubAuthProvider, GoogleAuthProvider, UserCredential, signInWithPopup } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, UserCredential, createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../configs/firebase-config';
+
 
 const GoogleLogin = (): void => {
   const GoogleProvider = new GoogleAuthProvider();
+  
   signInWithPopup(auth, GoogleProvider)
     .then((result: UserCredential): void => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -13,21 +15,22 @@ const GoogleLogin = (): void => {
       // console.log(credential, token, user);
       // setUserData(data);
     })
-    .catch((err) => {
-      // const errorCode = err.code;
-      // const errorMessage = err.message;
-      // The email of the user's account used.
-      // const email = err.customData.email;
-      // The AuthCredential type that was used.
-      // const credential = GoogleAuthProvider.credentialFromError(err);
-      // console.log('Fail!!!');
-      // console.log(errorCode, errorMessage, email, credential);
-      console.log(err);
+    .catch(err => {
+      console.log(err.code);
+      // switch (err.code) {
+      //   case 'auth/weak-password':
+      //     break;
+      //   case 'auth/invalid-email':
+      //     break;
+      //   case 'auth/email-already-in-use':
+      //     break;
+      // }
     });
 };
 
-const GithubLogin = () => {
+const GithubLogin = (): void => {
   const GithubProvider = new GithubAuthProvider();
+
   signInWithPopup(auth, GithubProvider)
     .then((result: UserCredential): void => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -37,17 +40,38 @@ const GithubLogin = () => {
       console.log(result.providerId);
       // console.log(credential, token, user);
     })
-    .catch((err) => {
-      // const errorCode = err.code;
-      // const errorMessage = err.message;
-      // The email of the user's account used.
-      // const email = err.customData.email;
-      // The AuthCredential type that was used.
-      // const credential = GoogleAuthProvider.credentialFromError(err);
-      console.log('Fail!!!');
-      console.log(err);
-      // console.log(errorCode, errorMessage, email, credential);
+    .catch(err => {
+      console.log(err.code);
+
+      // switch (err.code) {
+      //   case 'auth/weak-password':
+      //     break;
+      //     case 'auth/invalid-email':
+      //     break;
+      //     case 'auth/email-already-in-use':
+      //     break;
+      // }
     });
 };
 
-export { GithubLogin, GoogleLogin };
+const EmailSignUp = (email: string, password: string): void => {
+
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((result: UserCredential): void => {
+    console.log(result);
+  })
+  .catch(err => {
+    console.log(err.code);
+    // switch (err.code) {
+
+      // case 'auth/weak-password':
+      //   break;
+      // case 'auth/invalid-email':
+      //   break;
+      // case 'auth/email-already-in-use':
+      //   break;
+      // }
+  });
+}
+
+export { GithubLogin, GoogleLogin, EmailSignUp };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { AppBar, Box, IconButton, Menu, MenuItem, Stack } from '@mui/material';
 import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/icons-material';
-import { GoogleLogin, GithubLogin } from './FirebaseLogin';
+import { GoogleLogin, GithubLogin, EmailSignUp } from './FirebaseLogin';
 import colorConfig from '../../configs/colorConfig';
 
 const HeaderLayout = () => {
@@ -61,6 +61,7 @@ const HeaderLayout = () => {
             >
               <MenuItem onClick={GoogleLogin}>GoogleLogin</MenuItem>
               <MenuItem onClick={GithubLogin}>GithubLogin</MenuItem>
+              <MenuItem onClick={() => EmailSignUp('unjoo94@naver.com', '123123')}>EmailSignUp</MenuItem>
             </Menu>
           </>
         </Stack>

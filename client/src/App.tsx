@@ -6,7 +6,6 @@ import { routes } from './routes';
 
 
 const App = () => {
-
   return (
     <HelmetProvider>
       <BrowserRouter>
