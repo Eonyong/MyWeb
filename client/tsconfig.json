@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES6",
     "lib": [
       "ES6",
       "ES5",
@@ -9,12 +9,9 @@
       "esnext",
     ],
     "allowUmdGlobalAccess": true,
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "commonjs",
@@ -22,10 +19,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
     "jsx": "react",
-    "outDir": "dist"
+    // type compiler Use
+    "allowJs": true,
+    "checkJs": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    // strict type check
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
   },
   "include": [
     "src"

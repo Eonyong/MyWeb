@@ -3,6 +3,8 @@ import { getAnalytics } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
+const outputFilePath = './firebase-config.js';
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
@@ -20,5 +22,7 @@ getAnalytics(firebase);
 // getAuth and getDB from Firebase
 const auth = getAuth(firebase);
 const db = getFirestore(firebase);
+
+fs.writeFileSync(outputFilePath, JSON.stringify(firebaseConfig));
 
 export { db, auth };
