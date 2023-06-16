@@ -6,6 +6,7 @@ import { GoogleLogin, GithubLogin, EmailSignUp } from './FirebaseLogin';
 import colorConfig from '../../configs/colorConfig';
 
 const HeaderLayout = () => {
+  
   // const [userData, setUserData] = useState<null | UserCredential>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
