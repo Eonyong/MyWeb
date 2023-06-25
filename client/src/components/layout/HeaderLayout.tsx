@@ -2,20 +2,18 @@ import * as React from 'react';
 import { useState } from 'react';
 import { AppBar, Box, IconButton, Menu, MenuItem, Stack } from '@mui/material';
 import { NotificationsOutlined, Person3Outlined, SearchOutlined } from '@mui/icons-material';
-import { GoogleLogin, GithubLogin, EmailSignUp } from './FirebaseLogin';
+import { GoogleLogin, GithubLogin } from '../common/FirebaseLogin';
 import colorConfig from '../../configs/colorConfig';
+import AlertDialog from './AlertDialog';
 
 const HeaderLayout = () => {
-  
-  // const [userData, setUserData] = useState<null | UserCredential>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+  const openAlert = () => setOpen(true);
+  const closeAlert = () => setOpen(false);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -33,6 +31,7 @@ const HeaderLayout = () => {
         }}
       >
         <Box sx={{ flexGrow: 1 }} />
+        <AlertDialog open={open} handleClose={closeAlert} />
 
         <Stack direction="row" alignItems="center" sx={{ mr: 1, color: 'text.primary' }}>
           <IconButton>
@@ -62,7 +61,7 @@ const HeaderLayout = () => {
             >
               <MenuItem onClick={GoogleLogin}>GoogleLogin</MenuItem>
               <MenuItem onClick={GithubLogin}>GithubLogin</MenuItem>
-              <MenuItem onClick={() => EmailSignUp('unjoo94@naver.com', '123123')}>EmailSignUp</MenuItem>
+              <MenuItem onClick={openAlert}>EmailSignUp</MenuItem>
             </Menu>
           </>
         </Stack>
