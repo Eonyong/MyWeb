@@ -1,7 +1,7 @@
 import { Box, Toolbar } from '@mui/material';
 import * as React from 'react';
 import Nav from '../common/Sidebar';
-import HeaderLayout from '../common/HeaderLayout';
+import HeaderLayout from './HeaderLayout';
 import { Outlet } from 'react-router-dom';
 import colorConfig from '../../configs/colorConfig';
 import sizeConfig from '../../configs/sizeConfig';
