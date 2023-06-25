@@ -21,6 +21,4 @@ getAnalytics(firebase);
 const auth = getAuth(firebase);
 const db = getFirestore(firebase);
 
-firebase.writeFileSync('./firebase-config.js', JSON.stringify(firebaseConfig));
-
 export { db, auth };
